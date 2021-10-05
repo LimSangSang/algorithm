@@ -110,4 +110,104 @@ for i in range(h+1):
             # 매 시각 안에 '3'이 포함되어 있다면 카운트 증가
             if '3' in str(i)+str(j)+str(k):
                 count+=1
+print(count)
+
+'''
+2021.10.05
+[이것이 코딩테스트다] p.115 왕실의 나이트
+
+8 * 8 좌표 평면이 있다. 나이트는 말을 타고 있기에 이동할 때는 L자 형태로만 이동할 수 있으며 정원 밖으로는 나갈 수 없다. 나이트는 특정한 위치에서 다음과 같은 2가지 경우로 이동할 수 있다.
+1. 수평으로 두 칸 이동한 뒤에 수직으로 한 칸 이동하기
+2. 수직으로 두 칸 이동한 뒤에 수평으로 한 칸 이동하기
+
+이때 행 위치를 표현할 때는 1부터 8로 표현하며, 열 위치를 표현할 때는 a부터 h로 표현한다.
+<입력예시 1> <출력 예시 1>
+a1         2
+<입력예시 2> <출력 예시 2>
+c2         6
+'''
+
+# 나의 답
+data = str(input())
+move=['R', 'L', 'U', 'D']
+a=['a','b','c','d','e','f','g','h']
+print(type(int(data[1])) ,type(a.index(data[0])+1))
+now=[int(data[1]) ,a.index(data[0])+1]
+p=now
+count=0
+for i in move:
+    if i=='R':
+        if p[0]+1>0 and p[1]+2>0: 
+            p=[p[0]+1, p[1]+2]
+            p=now
+            count+=1 
+            print('R 1', p[0]+1, p[1]+2)
+        if p[0]-1>0 and p[1]+2>0: 
+            p=[p[0]-1, p[1]+2]
+            p=now
+            count+=1 
+            print('R 2', p[0]-1, p[1]+2)
+            
+    if i=='L':
+        if p[0]+1>0 and p[1]-2>0: 
+            p=[p[0]+1, p[1]-2]
+            p=now
+            count+=1 
+            print('L 1', p[0]+1, p[1]-2)
+        if p[0]-1>0 and p[1]-2>0: 
+            p=[p[0]-1, p[1]-2]
+            p=now
+            count+=1 
+            print('L 2', p[0]-1, p[1]-2)
+            
+    if i=='U':
+        if p[0]+2>0 and p[1]-1>0: 
+            p=[p[0]+2, p[1]-1]
+            p=now
+            count+=1 
+            print('U 1', p[0]+2, p[1]-1)
+        if p[0]+2>0 and p[1]+1>0: 
+            p=[p[0]+2, p[1]+1 ]
+            p=now
+            count+=1 
+            print('U 2', p[0]+2, p[1]+1)
+            
+    if i=='D':
+        if p[0]-2>0 and p[1]-1>0: 
+            p=[p[0]-2, p[1]-1]
+            p=now
+            count+=1 
+            print('D 1', p[0]-2, p[1]-1)
+        if p[0]-2>0 and p[1]+1>0: 
+            p=[p[0]-2, p[1]+1 ]
+            p=now
+            count+=1 
+            print('D 2', p[0]-2, p[1]+1)
+        
+print(count)
+
+# 해답
+'''
+나이트의 이동 경로를 steps 변수에 넣는다면, 이 2가지 규칙에 따라 steps=[(-2, -1), (-1, -2), (1, -2), (2, -1), (2, 1), (1, 2), (-1, 2), (-2, 1)]로 값을 대입할 수 있다. 
+
+이제 나이트의 현재 위치가 주어지면 현재 위치에서 이동 경로를 더한 다음, 8 * 8 좌표 평면에 있는지 확인하면 된다. 이 과정은 반복문으로 처리할 수 있다.
+'''
+
+input_data=input()
+row = int(input_data[1])
+column = int(ord(input_data[0])) - int(ord('a')) + 1
+
+# 나이트가 이동할 수 있는 8가지 방향 정의
+steps = [(-2, -1), (-1, -2), (1, -2), (2, -1), (2, 1), (1, 2), (-1, 2), (-2, 1)]
+
+# 8가지 방향에 대하여 각 위치로 이동이 가능한지 확인
+result=0
+for step in steps:
+    # 이동하고자 하는 위치 확인
+    next_row = row + step[0]
+    next_column = column + step[1]
+
+    # 해당 위치로 이동이 가능하다면 카운트 증가
+    if next_row >= 1 and next_row <= 8 and next_column >= 1 and next_column <= 8:
+        result+=1
 print(result)
