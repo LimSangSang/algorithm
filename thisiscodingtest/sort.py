@@ -79,3 +79,50 @@ array = sorted(array, key=lambda student: student[1])
 
 for student in array:
     print(student[0], end=' ')
+
+
+'''
+2021.10.21
+[이것이 코딩테스트다] p.182 두 배열의 원소 교체
+두 개의 배열 A, B가 있다. 두 배열은 N개의 원소로 구성되어 있고, 배열의 원소는 모두 자연수이다.
+최대 K번의 바꿔치기 연산을 수행할 수 있는데, 바꿔치기 연산이란 배열 A에 있는 원소 하나와 배열 B에 있는 원소 하나를 골라서 두 원소를 서로 바꾸는 것을 말한다.
+최종 목표는 배열 A의 모든 원소의 합이 최대가 되도록 하는 것이다.
+N, K 그리고 배열 A, B 정보가 주어졌을 때, 최대 K 번의 바꿔치기 연산을 수행하여 만들 수 있는 배열 A의 모든 원소의 합을 구하라.
+'''
+# 내 풀이
+# 전체적인 건 맞았지만 B가 A 보다 클 때의 조건을 생각 못함
+n, k = map(int, input().split())
+list_a = list(map(int, input().split()))
+list_b = list(map(int, input().split()))
+
+result=0
+
+list_a.sort()
+list_b.sort(reverse=True)
+print(list_a)
+print(list_b)
+print('-------')
+
+for i in range(k):
+    list_a[i], list_b[i] = list_b[i], list_a[i]
+    
+print(list_a)
+print(list_b)
+
+print(sum(list_a))
+
+# 해설
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+
+a.sort()
+b.sort(reverse=True)
+
+for i in range(k):
+    if a[i] < b[i]:
+        a[i], b[i] = b[i], a[i]
+    else:
+        break
+print(sum(a))
+
