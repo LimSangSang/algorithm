@@ -232,7 +232,7 @@ N개의 자연수가 입력되면 각 자연수의 자릿수의 합을 구하고
 ▣ 입력예제 1 3
 125 15232 97
 ▣ 출력예제 1 97
-'''
+
 # 나의 풀이
 n = input()
 num=0
@@ -269,7 +269,7 @@ for x in a:
         res=x
 
 print(res)
-
+'''
 
 '''
 소수(에라토스테네스 체)
@@ -281,7 +281,7 @@ print(res)
 첫 줄에 소수의 개수를 출력합니다.
 ▣ 입력예제 1 20
 ▣ 출력예제 1 8
-'''
+
 # 내 풀이(틀림)
 n = int(input())
 arr = []
@@ -296,10 +296,77 @@ print(arr)
 n=int(input())
 ch=[0]*(n+1)
 cnt=0
+print(ch)
 for i in range(2, n+1):
+    print('>', i, ch[i])
     if ch[i]==0:
         cnt+=1
         for j in range(i, n+1, i):
             ch[j]=1
 
 print(cnt)
+'''
+
+'''
+뒤집은 소수
+N개의 자연수가 입력되면 각 자연수를 뒤집은 후 그 뒤집은 수가 소수이면 그 수를 출력하는 프로그램을 작성하세요. 예를 들어 32를 뒤집으면 23이고, 23은 소수이다. 그러면 23을 출력 한다. 단 910를 뒤집으면 19로 숫자화 해야 한다. 첫 자리부터의 연속된 0은 무시한다.
+뒤집는 함수인 def reverse(x) 와 소수인지를 확인하는 함수 def isPrime(x)를 반드시 작성하 여 프로그래밍 한다.
+▣ 입력설명
+첫 줄에 자연수의 개수 N(3<=N<=100)이 주어지고, 그 다음 줄에 N개의 자연수가 주어진다. 각 자연수의 크기는 100,000를 넘지 않는다.
+▣ 출력설명
+첫 줄에 뒤집은 소수를 출력합니다. 출력순서는 입력된 순서대로 출력합니다.
+▣ 입력예제 1
+5
+32 55 62 3700 250
+▣ 출력예제 1 23 73
+'''
+
+import math
+
+# 나의 풀이
+n = int(input())
+a = list(map(int, input().split()))
+result = []
+
+def is_prime_num(x):
+    for i in range(2, int(math.sqrt(x))+1): # n의 제곱근을 정수화 시켜준 후 + 1
+        if x % i == 0:
+            return False
+    print(x, end=' ')
+    result.append(x)
+    return True
+
+def reverse(x):
+    return int(str(x)[::-1])
+for i in a:
+    item = reverse(i)
+    is_prime_num(item)
+    
+print('결과')
+print(result)
+
+
+# 해설
+n = int(input())
+a = list(map(int, input().split()))
+def reverse(x):
+    res=0
+    while x>0:
+        t=x%10
+        res=res*10+t
+        x=x//10
+    return res
+
+def isPrime(x):
+    if x==1:
+        return False
+    for i in range(2, x//2+1):
+        if x%i==0:
+            return False
+    else:
+        return True
+for x in a:
+    tmp = reverse(x)
+    if isPrime(tmp):
+        print(tmp, end=' ')
+
