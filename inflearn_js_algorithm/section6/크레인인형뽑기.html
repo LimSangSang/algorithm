@@ -10,15 +10,65 @@
                 const stack=[]
                 for (let a of moves) {
                     for (let i=0; i<board.length; i++) {
-                        console.log(i, a-1, board[i][a-1])
-                        if (board[i][a-1]>0) {
-                            console.log('aaa', board[i][a-1])
-                            stack.push(board[i][a-1])
+                        // console.log(i, a-1, board[i][a-1])
+                        let tmp=board[i][a-1]
+                        if (tmp>0) {
+                            if (stack[stack.length-1]===tmp) {
+                                stack.pop()
+                                answer+=2
+                                
+                            } else stack.push(tmp)
+                            console.log(i, a-1, tmp)
+                            board[i].splice(a-1, 1, 0)
+                            console.log(board)
                             break
                         }
+                        
                     }
                 }
                 console.log(stack)
+                return(answer)
+            }
+            
+            let a=[[0,0,0,0,0],
+                   [0,0,0,0,0],
+                   [0,2,5,0,0],
+                   [0,2,4,4,2],
+                   [0,5,1,3,1]];
+
+            let b=[1, 5, 3, 5, 1, 2, 1, 4]; // 4 2 4
+            console.log(solution(a, b));
+        </script>
+    </body>
+</html>
+
+<!-- 해설
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(board, moves){
+                let answer=0;
+                let stack=[];
+                moves.forEach(pos => {
+                    for(let i=0; i<board.length; i++){
+                        if(board[i][pos-1]!==0){
+                            let tmp=board[i][pos-1];
+                            board[i][pos-1]=0;
+                            if(tmp===stack[stack.length-1]){
+                                stack.pop();
+                                answer+=2;
+                            }
+                            else stack.push(tmp);
+                            break;
+                        }
+                    }
+                });
+                                
+                return answer;
             }
             
             let a=[[0,0,0,0,0],
@@ -32,3 +82,4 @@
         </script>
     </body>
 </html>
+-->
