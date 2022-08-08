@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                let a=parseInt(n/2)
+                let c=0
+                let b=''
+                const count = () => {
+                    a=parseInt(a/2)
+                    c=a%2
+                    b+=c.toString()
+                    console.log(a, b)
+                    if (c===0) return b
+                    count()
+                }
+                count()
+            }
+
+            console.log(solution(11));
+        </script>
+    </body>
+</html>
+
+<!-- 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                let answer="";
+                function DFS(n){
+                     if(n===0) return;
+                     else{
+                         DFS(parseInt(n/2));
+                         answer+=String(n%2);
+                     }
+                }
+                DFS(n);
+                return answer;
+            }
+
+            console.log(solution(11));
+        </script>
+    </body>
+</html>
+-->
